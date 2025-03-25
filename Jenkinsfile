@@ -11,4 +11,19 @@ pipeline {
             }
         }
     }
+
+    post { 
+        always {
+            "I will say Hello Again!"
+        }
+        success {
+            "Yay, Success"
+        }
+        failure {
+            "Oh no, failure"
+        }
+        cleanup {
+            "Don't care success or error"
+        }
+    }
 }
