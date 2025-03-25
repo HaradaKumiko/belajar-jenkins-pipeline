@@ -14,16 +14,16 @@ pipeline {
 
     post { 
         always {
-            "I will say Hello Again!"
+            echo "I will say Hello Again!"
         }
         success {
-            "Yay, Success"
+            echo "Yay, Success"
         }
         failure {
-            "Oh no, failure"
+            echo "Oh no, failure"
         }
         cleanup {
-            "Don't care success or error"
+            echo "Don't care success or error"
         }
     }
 }
