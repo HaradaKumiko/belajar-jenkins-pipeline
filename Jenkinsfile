@@ -1,8 +1,9 @@
 pipeline {
-    agent 
+    agent {
         node {
             label: 'linux && java'
         }
+    }
     stages {
         stage ("Hello"){
             steps {
