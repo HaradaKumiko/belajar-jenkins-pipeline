@@ -4,29 +4,34 @@ pipeline {
             label 'linux && java'
         }
     }
-    
+
     stages {
         stage ("Build"){
             steps {
-                echo("Hello Build")
+                echo("Hello Build 1")
+                echo("Hello Build 2")
+                echo("Hello Build 3")
             }
         }
 
         stage ("Test"){
             steps {
-                echo("Hello Test")
-                sh("error")
+                echo("Hello Test 1")
+                echo("Hello Test 2")
+                echo("Hello Test 3")
             }
         }
 
         stage ("Deploy"){
             steps {
-                echo("Hello Deploy")
+                echo("Hello Deploy 1")
+                echo("Hello Deploy 2")
+                echo("Hello Deploy 3")
             }
         }
     }
 
-    post { 
+    post {
         always {
             echo "I will say Hello Again!"
         }
