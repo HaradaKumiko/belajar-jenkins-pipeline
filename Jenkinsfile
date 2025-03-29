@@ -36,7 +36,6 @@ pipeline {
                     }
                 }
                 echo("Start Build")
-                echo("Roles : ${ROLES}")
                 echo("Company : ${COMPANY}")
                 echo("Division : ${DIVISION}")
                 // sh("./mvnw clean compile test-compile")
