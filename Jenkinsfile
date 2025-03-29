@@ -1,13 +1,19 @@
 pipeline {
-    agent none
+    agent any
 
     stages {
-        stage ("Build"){
-        agent {
-            node {
-                label 'linux && java'
+
+        stage ("Prepare") { 
+            steps {
+                echo("Start Job : ${env.JOB_NAME}")
+                echo("Start Job : ${env.BUILD_NUMBER}")
+                echo("Start Job : ${env.WORKSPACE}")     
+                echo "Build status: ${currentBuild.projectName}"
             }
         }
+    
+
+        stage ("Build"){
             steps {
                 script { 
                     for (int i = 0; i<5; i++) {
@@ -15,16 +21,11 @@ pipeline {
                     }
                 }
                 echo("Start Build")
-                sh("./mvnw clean compile test-compile")
+                // sh("./mvnw clean compile test-compile")
             }
         }
 
-        stage ("Test"){
-        agent {
-            node {
-                label 'test'
-            }
-        }            
+        stage ("Test"){         
             steps {
                 script {
                     def data = [
@@ -36,17 +37,12 @@ pipeline {
                     writeJSON(file: "data.json", json: data)
                 }
                 echo("Start Test")
-                sh("./mvnw test")
+                // sh("./mvnw test")
             }
         }
 
-        stage ("Deploy"){
-        agent {
-            node {
-                label 'linux && java'
-            }
-        }            
-                steps {
+        stage ("Deploy"){            
+            steps {
                 echo("Start Deploy")
             }
         }
