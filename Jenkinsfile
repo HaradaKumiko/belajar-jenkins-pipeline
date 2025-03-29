@@ -1,19 +1,34 @@
 pipeline {
     agent any
 
+    environment {
+        AUTHOR = "HaradaKumiko"
+        COMPANY = "Google"
+    }
+
     stages {
 
         stage ("Prepare") { 
+            environment {
+                ROLES = "DevOps Engineer"
+            }
             steps {
                 echo("Start Job : ${env.JOB_NAME}")
                 echo("Start Job : ${env.BUILD_NUMBER}")
                 echo("Start Job : ${env.WORKSPACE}")     
                 echo "Build status: ${currentBuild.projectName}"
+
+                echo("Author : ${AUTHOR}")
+                echo("Roles : ${ROLES}")
+                echo("Company : ${COMPANY}")
             }
         }
     
 
         stage ("Build"){
+            environment {
+                DIVISION = "RND"
+            }
             steps {
                 script { 
                     for (int i = 0; i<5; i++) {
@@ -21,6 +36,9 @@ pipeline {
                     }
                 }
                 echo("Start Build")
+                echo("Roles : ${ROLES}")
+                echo("Company : ${COMPANY}")
+                echo("Division : ${DIVISION}")
                 // sh("./mvnw clean compile test-compile")
             }
         }
