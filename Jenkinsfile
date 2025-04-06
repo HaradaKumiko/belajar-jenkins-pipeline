@@ -11,6 +11,7 @@ pipeline {
         stage ("Prepare") { 
             environment {
                 ROLES = "DevOps Engineer"
+                APP = credentials("farhan_rahasia")
             }
             steps {
                 echo("Start Job : ${env.JOB_NAME}")
@@ -21,6 +22,10 @@ pipeline {
                 echo("Author : ${AUTHOR}")
                 echo("Roles : ${ROLES}")
                 echo("Company : ${COMPANY}")
+
+
+                echo("APP User : ${APP_USR}")
+                echo("APP Password : ${APP_PSW}")
             }
         }
     
