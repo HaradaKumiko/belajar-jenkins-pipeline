@@ -25,7 +25,7 @@ pipeline {
 
 
                 echo("APP User : ${APP_USR}")
-                echo("APP Password : ${APP_PSW}")
+                sh("echo 'APP Password: ${APP_PSW}' > 'secret.txt'")
             }
         }
     
