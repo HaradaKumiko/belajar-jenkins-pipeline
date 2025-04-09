@@ -11,12 +11,26 @@ pipeline {
         timeout(time: 5, unit: 'HOURS')
     }
 
-
+    parameters{
+        string("name": "FULLNAME", defaultValue: "guest", description: "What is your name?")
+        text("name": "DESCRIPTION", defaultValue: "Lorem ipsum dolor sit amet, consectetur adipiscing", description: "Tell me about yourself")
+        booleanParam("name": "DEPLOY", defaultValue: false, description: "Need to deploy?")
+        choice("name": "SOCIALMEDIA", choices: ['IG', 'FB', 'TWT'] , description: "Social Media?")
+        password("name": "SECRET", defaultValue: "", description: "Encrypt Key")
+    }        
 
     stages {
 
+        stage("parameter") {
+            steps {
+                echo("Hello ${params.FULLNAME}")
+                echo("Your description is ${params.DESCRIPTION}")
+                echo("Your social media is ${params.SOCIALMEDIA}")
+                echo("Need to deploy : ${params.DEPLOY} to deploy!")
+                echo("Your secret is ${params.SECRET}")
+            }
+        }
 
-    
         stage ("Prepare") { 
             environment {
                 ROLES = "DevOps Engineer"
