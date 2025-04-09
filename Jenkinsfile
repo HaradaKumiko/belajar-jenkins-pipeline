@@ -5,6 +5,11 @@ pipeline {
         AUTHOR = "HaradaKumiko"
         COMPANY = "Google"
     }
+    
+    options {
+        disableConcurrentBuilds()
+        timeout(time: 10, unit: 'SECONDS')
+    }
 
     stages {
 
