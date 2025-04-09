@@ -19,6 +19,7 @@ pipeline {
                 APP = credentials("farhan_rahasia")
             }
             steps {
+                sleep(30)
                 echo("Start Job : ${env.JOB_NAME}")
                 echo("Start Job : ${env.BUILD_NUMBER}")
                 echo("Start Job : ${env.WORKSPACE}")     
