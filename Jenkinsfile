@@ -5,7 +5,7 @@ pipeline {
         AUTHOR = "HaradaKumiko"
         COMPANY = "Google"
     }
-
+    
     options {
         // disableConcurrentBuilds()
         timeout(time: 5, unit: 'HOURS')
@@ -23,10 +23,9 @@ pipeline {
         cron("*/5 * * * *")
         // pollSCM("*/5 * * * *")
         // upstream(upstreamProjects: 'job1,job2', threshold: hudson.model.Result.SUCCESS)
-    }
-
-
-    }
+    } 
+    
+      
 
     stages {
 
@@ -40,7 +39,7 @@ pipeline {
             }
         }
 
-        stage ("Prepare") {
+        stage ("Prepare") { 
             environment {
                 ROLES = "DevOps Engineer"
                 APP = credentials("farhan_rahasia")
@@ -48,7 +47,7 @@ pipeline {
             steps {
                 echo("Start Job : ${env.JOB_NAME}")
                 echo("Start Job : ${env.BUILD_NUMBER}")
-                echo("Start Job : ${env.WORKSPACE}")
+                echo("Start Job : ${env.WORKSPACE}")     
                 echo "Build status: ${currentBuild.projectName}"
 
                 echo("Author : ${AUTHOR}")
@@ -60,14 +59,14 @@ pipeline {
                 sh('echo "APP Password: ${APP_PSW}" > "rahasia.txt"')
             }
         }
-
+    
 
         stage ("Build"){
             environment {
                 DIVISION = "RND"
             }
             steps {
-                script {
+                script { 
                     for (int i = 0; i<5; i++) {
                         echo("Script ${i}")
                     }
@@ -79,7 +78,7 @@ pipeline {
             }
         }
 
-        stage ("Test"){
+        stage ("Test"){         
             steps {
                 script {
                     def data = [
@@ -95,7 +94,7 @@ pipeline {
             }
         }
 
-        stage ("Deploy"){
+        stage ("Deploy"){            
             steps {
                 echo("Start Deploy")
             }
