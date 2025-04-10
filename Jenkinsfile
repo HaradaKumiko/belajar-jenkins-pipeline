@@ -11,19 +11,22 @@ pipeline {
         timeout(time: 5, unit: 'HOURS')
     }
 
-    // parameters{
-    //     string("name": "FULLNAME", defaultValue: "guest", description: "What is your name?")
-    //     text("name": "DESCRIPTION", defaultValue: "Lorem ipsum dolor sit amet, consectetur adipiscing", description: "Tell me about yourself")
-    //     booleanParam("name": "DEPLOY", defaultValue: false, description: "Need to deploy?")
-    //     choice("name": "SOCIALMEDIA", choices: ['IG', 'FB', 'TWT'] , description: "Social Media?")
-    //     password("name": "SECRET", defaultValue: "", description: "Encrypt Key")
-    // }
+    parameters{
+        string("name": "FULLNAME", defaultValue: "guest", description: "What is your name?")
+        text("name": "DESCRIPTION", defaultValue: "Lorem ipsum dolor sit amet, consectetur adipiscing", description: "Tell me about yourself")
+        booleanParam("name": "DEPLOY", defaultValue: false, description: "Need to deploy?")
+        choice("name": "SOCIALMEDIA", choices: ['IG', 'FB', 'TWT'] , description: "Social Media?")
+        password("name": "SECRET", defaultValue: "", description: "Encrypt Key")
+    }
 
-    // triggers{
-    //     cron("*/5 * * * *")
-    //     // pollSCM("*/5 * * * *")
-    //     // upstream(upstreamProjects: 'job1,job2', threshold: hudson.model.Result.SUCCESS)
-    // }
+    triggers{
+        cron("*/5 * * * *")
+        // pollSCM("*/5 * * * *")
+        // upstream(upstreamProjects: 'job1,job2', threshold: hudson.model.Result.SUCCESS)
+    }
+
+
+    }
 
     stages {
 
@@ -93,16 +96,8 @@ pipeline {
         }
 
         stage ("Deploy"){
-            input{
-                message "Can we deploy?"
-                ok: "Yes, of course"
-                submitter: "farhan,rivaldy"
-                parameters{
-                    choice(name: "TARGET_ENV", choices: ['DEV', 'QA', 'PROD'], description: "Which Environment?")
-                }
-            }
             steps {
-                echo("Start Deploy to ${TARGET_ENV}")
+                echo("Start Deploy")
             }
         }
     }
