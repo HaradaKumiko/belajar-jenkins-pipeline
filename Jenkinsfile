@@ -25,7 +25,7 @@ pipeline {
         // upstream(upstreamProjects: 'job1,job2', threshold: hudson.model.Result.SUCCESS)
     } 
     
-      
+y      
 
     stages {
 
@@ -94,9 +94,17 @@ pipeline {
             }
         }
 
-        stage ("Deploy"){            
+        stage ("Deploy"){
+            input{
+                message "Can we deploy?"
+                ok "Yes, of course"
+                submitter "farhan,rivaldy"
+                parameters{
+                    choice(name: "TARGET_ENV", choices: ['DEV', 'QA', 'PROD'], description: "Which Environment?")
+                }
+            }
             steps {
-                echo("Start Deploy")
+                echo("Start Deploy to ${TARGET_ENV}")
             }
         }
     }
