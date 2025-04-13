@@ -45,6 +45,13 @@ pipeline {
                             sleep(5)
                         }
                     }
+
+                    stage("Prepare Golang") {
+                        steps{
+                            error("Prepare Golang")
+                            sleep(5)
+                        }
+                    }
             }
         }
 
