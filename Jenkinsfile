@@ -11,13 +11,13 @@ pipeline {
         timeout(time: 5, unit: 'HOURS')
     }
 
-    parameters{
-        string("name": "FULLNAME", defaultValue: "guest", description: "What is your name?")
-        text("name": "DESCRIPTION", defaultValue: "Lorem ipsum dolor sit amet, consectetur adipiscing", description: "Tell me about yourself")
-        booleanParam("name": "DEPLOY", defaultValue: false, description: "Need to deploy?")
-        choice("name": "SOCIALMEDIA", choices: ['IG', 'FB', 'TWT'] , description: "Social Media?")
-        password("name": "SECRET", defaultValue: "", description: "Encrypt Key")
-    }
+    // parameters{
+    //     string("name": "FULLNAME", defaultValue: "guest", description: "What is your name?")
+    //     text("name": "DESCRIPTION", defaultValue: "Lorem ipsum dolor sit amet, consectetur adipiscing", description: "Tell me about yourself")
+    //     booleanParam("name": "DEPLOY", defaultValue: false, description: "Need to deploy?")
+    //     choice("name": "SOCIALMEDIA", choices: ['IG', 'FB', 'TWT'] , description: "Social Media?")
+    //     password("name": "SECRET", defaultValue: "", description: "Encrypt Key")
+    // }
 
     // triggers{
     //     cron("*/5 * * * *")
@@ -28,6 +28,22 @@ pipeline {
 
 
     stages {
+
+        stage("preparation") {
+            stages {
+                stage("Prepare Java") {
+                    steps{
+                        echo("Prepare Java")
+                    }
+                }
+
+                stage("Prepare Maven") {
+                    steps{
+                        echo("Prepare Maven")
+                    }
+                }
+            }
+        }
 
         stage("parameter") {
             steps {
@@ -109,16 +125,16 @@ pipeline {
             }
         }
 
-        stage("Release"){
-            when{
-                expression {
-                    return params.DEPLOY
-                }
-            }
-            steps {
-                echo("release it")
-            }
-        }
+        // stage("Release"){
+        //     when{
+        //         expression {
+        //             return params.DEPLOY
+        //         }
+        //     }
+        //     steps {
+        //         echo("release it")
+        //     }
+        // }
     }
 
 
