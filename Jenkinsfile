@@ -109,16 +109,16 @@ pipeline {
             }
         }
 
-        stage("Release"){
-            when{
-                expression {
-                    return params.DEPLOY
-                }
-            }
-            steps {
-                echo("release it")
-            }
-        }
+        // stage("Release"){
+        //     when{
+        //         expression {
+        //             return params.DEPLOY
+        //         }
+        //     }
+        //     steps {
+        //         echo("release it")
+        //     }
+        // }
     }
 
 
