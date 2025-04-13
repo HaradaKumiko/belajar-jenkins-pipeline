@@ -5,26 +5,26 @@ pipeline {
         AUTHOR = "HaradaKumiko"
         COMPANY = "Google"
     }
-    
+
     options {
         // disableConcurrentBuilds()
         timeout(time: 5, unit: 'HOURS')
     }
 
-    // parameters{
-    //     string("name": "FULLNAME", defaultValue: "guest", description: "What is your name?")
-    //     text("name": "DESCRIPTION", defaultValue: "Lorem ipsum dolor sit amet, consectetur adipiscing", description: "Tell me about yourself")
-    //     booleanParam("name": "DEPLOY", defaultValue: false, description: "Need to deploy?")
-    //     choice("name": "SOCIALMEDIA", choices: ['IG', 'FB', 'TWT'] , description: "Social Media?")
-    //     password("name": "SECRET", defaultValue: "", description: "Encrypt Key")
-    // }
+    parameters{
+        string("name": "FULLNAME", defaultValue: "guest", description: "What is your name?")
+        text("name": "DESCRIPTION", defaultValue: "Lorem ipsum dolor sit amet, consectetur adipiscing", description: "Tell me about yourself")
+        booleanParam("name": "DEPLOY", defaultValue: false, description: "Need to deploy?")
+        choice("name": "SOCIALMEDIA", choices: ['IG', 'FB', 'TWT'] , description: "Social Media?")
+        password("name": "SECRET", defaultValue: "", description: "Encrypt Key")
+    }
 
     // triggers{
     //     cron("*/5 * * * *")
     //     // pollSCM("*/5 * * * *")
     //     // upstream(upstreamProjects: 'job1,job2', threshold: hudson.model.Result.SUCCESS)
-    // } 
-    
+    // }
+
 
 
     stages {
@@ -39,7 +39,7 @@ pipeline {
             }
         }
 
-        stage ("Prepare") { 
+        stage ("Prepare") {
             environment {
                 ROLES = "DevOps Engineer"
                 APP = credentials("farhan_rahasia")
@@ -47,7 +47,7 @@ pipeline {
             steps {
                 echo("Start Job : ${env.JOB_NAME}")
                 echo("Start Job : ${env.BUILD_NUMBER}")
-                echo("Start Job : ${env.WORKSPACE}")     
+                echo("Start Job : ${env.WORKSPACE}")
                 echo "Build status: ${currentBuild.projectName}"
 
                 echo("Author : ${AUTHOR}")
@@ -59,14 +59,14 @@ pipeline {
                 sh('echo "APP Password: ${APP_PSW}" > "rahasia.txt"')
             }
         }
-    
+
 
         stage ("Build"){
             environment {
                 DIVISION = "RND"
             }
             steps {
-                script { 
+                script {
                     for (int i = 0; i<5; i++) {
                         echo("Script ${i}")
                     }
@@ -78,7 +78,7 @@ pipeline {
             }
         }
 
-        stage ("Test"){         
+        stage ("Test"){
             steps {
                 script {
                     def data = [
@@ -105,6 +105,14 @@ pipeline {
             }
             steps {
                 echo("Start Deploy to ${TARGET_ENV}")
+            }
+        }
+
+        stage("Release"){
+            when{
+                expression {
+                    return params.DEPLOY
+                }
             }
         }
     }
