@@ -30,16 +30,21 @@ pipeline {
     stages {
 
         stage("preparation") {
-            stages {
-                stage("Prepare Java") {
-                    steps{
-                        echo("Prepare Java")
+            failFast true
+            parallel{
+                stages {
+                    stage("Prepare Java") {
+                        steps{
+                            echo("Prepare Java")
+                            sleep(5)
+                        }
                     }
-                }
 
-                stage("Prepare Maven") {
-                    steps{
-                        echo("Prepare Maven")
+                    stage("Prepare Maven") {
+                        steps{
+                            echo("Prepare Maven")
+                            sleep(5)
+                        }
                     }
                 }
             }
