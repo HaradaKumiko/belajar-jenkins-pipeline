@@ -103,6 +103,7 @@ pipeline {
                     choice(name: "TARGET_ENV", choices: ['DEV', 'QA', 'PROD'], description: "Which Environment?")
                 }
             }
+            
             steps {
                 echo("Start Deploy to ${TARGET_ENV}")
             }
@@ -113,6 +114,9 @@ pipeline {
                 expression {
                     return params.DEPLOY
                 }
+            }
+            steps {
+                echo("release it")
             }
         }
     }
