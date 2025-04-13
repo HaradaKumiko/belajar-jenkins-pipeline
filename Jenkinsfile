@@ -32,7 +32,6 @@ pipeline {
         stage("preparation") {
             failFast true
             parallel{
-                stages {
                     stage("Prepare Java") {
                         steps{
                             echo("Prepare Java")
@@ -46,7 +45,6 @@ pipeline {
                             sleep(5)
                         }
                     }
-                }
             }
         }
 
