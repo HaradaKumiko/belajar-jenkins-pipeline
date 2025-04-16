@@ -29,6 +29,31 @@ pipeline {
 
     stages {
 
+        stage("OS Setup"){
+            matrix{
+                axes {
+                    axis{
+                        name "OS"
+                        values "linux", "windows", "mac"
+                    }
+
+                    axis {
+                        name "ARC"
+                        values "32", "64"
+                    }
+                }
+            
+                stages{
+                    stage ("OS Setup"){
+                        steps {
+                            echo ("Setup ${OS} | ${ARC}")
+                        }
+                    }
+                }
+            }
+        }
+
+
         stage("preparation") {
             failFast true
             parallel{
@@ -42,13 +67,6 @@ pipeline {
                     stage("Prepare Maven") {
                         steps{
                             echo("Prepare Maven")
-                            sleep(5)
-                        }
-                    }
-
-                    stage("Prepare Golang") {
-                        steps{
-                            error("Prepare Golang")
                             sleep(5)
                         }
                     }
@@ -139,7 +157,7 @@ pipeline {
         //     when{
         //         expression {
         //             return params.DEPLOY
-        //         }
+        //         }ag
         //     }
         //     steps {
         //         echo("release it")
