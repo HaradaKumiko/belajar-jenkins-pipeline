@@ -168,16 +168,17 @@ pipeline {
             }
         }
 
-        // stage("Release"){
-        //     when{
-        //         expression {
-        //             return params.DEPLOY
-        //         }ag
-        //     }
-        //     steps {
-        //         echo("release it")
-        //     }
-        // }
+        stage("Release"){
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: "farhan_rahasia",
+                    usernameVariable: "USER",
+                    passwordVariable: "PASSWORD"
+                )]) {
+                    sh('echo "Release it with -u $USER -p $PASSWORD" > "relese.txt"')
+                }                
+            }
+        }
     }
 
 
